@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tworzenie</title>
+    <script defer src = 'scripttworzenie1.js' ></script>
+    <script defer src = 'FileSaver.js' ></script>
+    <style>
+        .Instrukcja{
+            /* place it to the right of the screen */
+            position: fixed;
+            right:5%;
+            top: 0;
+            
+        }
+        .tekst{
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <textarea id = 'textarea' width = "100%" height = "100%" name="text" id="text" style="height: 947px; width: 1315px; resize: none;" placeholder="Stwórz tabelę Przykład ) Text1 VARCHAR(20) NOT NULL"></textarea>
+    <div class = 'Instrukcja'>
+    <h1 class = 'tekst'>Instrukcja:</h1> <br>
+    <h1 class = 'tekst'>Po rozmiarze musi myć liczba!</h1>
+    <h1 class = 'tekst'>Typy zmiennych:</h1>
+    <ul>
+        <li class = 'tekst'>VARCHAR(rozmar) </li>
+        <li class = 'tekst'>INT(rozmar)</li>
+        <li class = 'tekst'>BOOL</li>
+        <li class = 'tekst'>DATE</li>
+    </ul>
+    Stwórz tabelę<input type = 'checkbox' id = 'checkbox' name = '1'value = 'Stwórz tabelę' onclick = 'zapisz_tabele()' checked> <br>
+    Stwórz bazę danych<input type = 'checkbox' id = 'checkbox ' name = '1' value = 'Stwórz bazę danych' onclick = 'zapisz_baze()'><br>
+    <button onclick = 'zapisz()'>Zapisz</button>
+    </div>
+
+    
+</body>
+</html>
