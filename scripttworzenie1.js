@@ -1,37 +1,63 @@
 
-var zmienne = ["VARCHAR", "INT", "BOOL", "DATE"]
-function zapisz_tabele(){
+
+function zapisz(){
     var textarea = document.getElementById("textarea").value;
-    var linijki = textarea.split(/\r\n|\r|\n/);
-    var trzecie_slowo = linijki[0].split(" ");
-    var nazwa_tabeli = trzecie_slowo[2];
-    var pierwszy_record =  linijki[1].split(" ");
-    var pierwszy_record_nazwa = pierwszy_record[0];
-    if(!linijki[0].includes("STWÓRZ TABELĘ "+nazwa_tabeli ) || nazwa_tabeli == ""){
-        alert("Linijka 1 ma błąd");
-    } 
-    if(!linijki[1].includes(pierwszy_record_nazwa) || !linijki[1].includes("rozmiar")){
-        alert("Linijka 2 ma błąd1");
-        alert(pierwszy_record[1]);
-    }else if (zmienne.includes(pierwszy_record[1]) == false){
-        alert("Linijka 2 ma błąd2");
+    var zapiszbaza = document.getElementById("checkbox1");
+    if(zapiszbaza.checked && (textarea.length > 18)){
+    if(przyciskbaza.checked){
+    var translacjawiadomosc = "CREATE DATABASE" + " " + textarea.split(" ")[3];
+        var blob = new Blob([translacjawiadomosc], {type: "text/plain;charset=utf-8"});
+        const href = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = "SQL"+".sql";
+        document.body.appendChild(link);
+        link.click();
+    }if(przycisktabela.checked){
+        var translacjawiadomosc = "CREATE TABLE" + " " + textarea.split(" ")[2]  + "\n";
+        for(var i = 3; i < textarea.split(" ").length; i++){
+            translacjawiadomosc += textarea.split(" ")[i] + " ";
 
-    }else if (pierwszy_record[1] == "" || pierwszy_record[1] == null){
-        alert("Nie podano nazwy dla pierwszego rekordu");
-    }else if (pierwszy_record[3] == ' ' || pierwszy_record[3] <= '0'){
-        alert("rozmiar nie może się równać 0 ");
-    }else{
-var translacja_table = "CREATE TABLE " + nazwa_tabeli + "(" + "\n" + pierwszy_record_nazwa + " " + pierwszy_record[1] +'(' +pierwszy_record[3] + ')' + "\n" + ")";
-var blob = new Blob([translacja_table], {type: "text/plain;charset=utf-8"});
-const href = window.URL.createObjectURL(blob);
-const link = document.createElement("a");
-link.href = href;
-link.download = nazwa_tabeli+".sql";
-document.body.appendChild(link);
-link.click();
-
-
+        }
+        translacjawiadomosc += "("
+        var blob = new Blob([translacjawiadomosc], {type: "text/plain;charset=utf-8"});
+        const href = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = "SQL"+".sql";
+        document.body.appendChild(link);
+        link.click();   
+    }
+}else{
+    if(ReferenceError){
+        alert("Wybierz opcje!")
+    }else if(textarea.length < 16){
+        alert("Wpisz więcej słów!")
     }
     
+}
+}
+
+
+
+
+
+
+
+function generuj(){
+     globalThis.przyciskbaza = document.getElementById("checkbox3");
+     globalThis. przycisktabela = document.getElementById("checkbox4");
+    globalThis.wiadomoscbaza = "STWÓRZ BAZĘ DANYCH podaj_nazwę_bazy";
+    if(przyciskbaza.checked){
+        textarea.value = wiadomoscbaza;
+    }if(przycisktabela.checked){
+        globalThis.numberinput = document.getElementById("number").value;
+        globalThis.wiadomosctabela = "STWÓRZ TABELĘ podaj_nazwę_tabeli" + "\n";
+        for(var i = 0; i < numberinput; i++){
+            wiadomosctabela += "nazwa_kolumny" + " " + "typ_zmiennej"+"(1)" + " "+ "dodatkowe informacje" +  "," + "\n";
+        }
+        textarea.value = wiadomosctabela;
+    }
     
 }
+
