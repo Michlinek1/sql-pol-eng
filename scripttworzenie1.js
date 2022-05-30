@@ -27,6 +27,20 @@ function zapisz(){
         link.download = "SQL"+".sql";
         document.body.appendChild(link);
         link.click();   
+    }if(przycisktabeladodaj.checked){
+        var translacjawiadomosc = "INSERT INTO" + " " + textarea.split(" ")[2];
+        for(var i = 3; i < textarea.split(" ").length; i++){
+            translacjawiadomosc += textarea.split(" ")[i] + " ";
+            
+
+        }
+        var blob = new Blob([translacjawiadomosc], {type: "text/plain;charset=utf-8"});
+        const href = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = "SQL"+".sql";
+        document.body.appendChild(link);
+        link.click();   
     }
 }else{
     if(ReferenceError){
@@ -47,7 +61,28 @@ function zapisz(){
 function generuj(){
      globalThis.przyciskbaza = document.getElementById("checkbox3");
      globalThis. przycisktabela = document.getElementById("checkbox4");
+     globalThis. przycisktabeladodaj = document.getElementById("checkbox5");
+
+     const przyciskdodajdotab = document.getElementById("number1").value;
     globalThis.wiadomoscbaza = "STWÓRZ BAZĘ DANYCH podaj_nazwę_bazy";
+    globalThis.wiadomoscDodawanie = "Dodaj do nazwa_tabeli(";
+    for(var x = 0; x< przyciskdodajdotab; x++){
+        if(x == przyciskdodajdotab-1){
+            wiadomoscDodawanie += "nazwa_kolumny" + " ";
+        }else{
+            wiadomoscDodawanie += "nazwa_kolumny" + ",";
+        }
+    }
+    wiadomoscDodawanie += ")";
+    wiadomoscDodawanie += " " +"VALUE" + " " + "(";
+    for(x = 0; x< przyciskdodajdotab; x++){
+        if(x == przyciskdodajdotab-1){
+            wiadomoscDodawanie += "wartość" + " ";
+        }else{
+            wiadomoscDodawanie += "wartość" + ",";
+        }
+    }
+    wiadomoscDodawanie += ");";
     if(przyciskbaza.checked){
         textarea.value = wiadomoscbaza;
     }if(przycisktabela.checked){
@@ -57,6 +92,9 @@ function generuj(){
             wiadomosctabela += "nazwa_kolumny" + " " + "typ_zmiennej"+"(1)" + " "+ "dodatkowe informacje" +  "," + "\n";
         }
         textarea.value = wiadomosctabela;
+    }
+    if(przycisktabeladodaj.checked){
+        textarea.value = wiadomoscDodawanie;
     }
     
 }
